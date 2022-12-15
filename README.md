@@ -2,17 +2,25 @@
 
 [장고 용어 및 핵심 기능](#장고-용어)
 
+[장고 프로젝트 만들기 및 APP구축](#장고-프로젝트-및-명령어와-mvt-만들기)
+
+[만약오류|동작이 이상하다면](#오류-강령)
 # 장고 특징
 
 1. Elegant URL : 바로이동[Django의 URL](#중요개념-urlconf)
     - URL을 직관적이고 쉽게 표현할 수 있음. 그리고 URL 자체를 파이썬 함수와 연결시키기 때문에 개발이 편리
 2. 다국어 지원
 
-3. 테스트용 웹 서버를 실행(runserver) 상태에서 소스 파일 수정시 즉시 반영
+3. `테스트용 웹 서버를 실행(runserver) 상태에서 소스 파일 수정시 즉시 반영`
 
 # 장고 용어
 
 ### MVT
+
+- Django workflow : URLconf - > View - > Model - > Template - > View -> client
+
+- Django 코딩순서 (책에서 추천 + 나의 견해 추가) : Model - > Template - > View  - > URLconf
+
 - MVC
     - M : Model, 데이터 , 개발자 역할
     - V : View, UI. UI 디자이너는 U만 신경쓰면 됨
@@ -68,7 +76,62 @@
 
 
 ### Application
-    - 순수의미 : 여러 프로그램이 뭉쳐져 기능을 하는 것
-    - 장고 : Application이 모여 Project가 되는 것
-        - Project : 웹사이트에 관한 모든 프로그램
-        - Application : Module화된 (특정 기능을 하게된 unit) 
+- 순수의미 : 여러 프로그램이 뭉쳐져 기능을 하는 것
+- 장고 : Application이 모여 Project가 되는 것
+    - Project : 웹사이트에 관한 모든 프로그램
+    - Application : Module화된 (특정 기능을 하게된 unit) 특정 기능을 하는 것
+        - 하나의 Application은 여러 프로젝트에 포함될 수 있음
+
+
+
+# 장고 프로젝트 및 명령어와 MVT 만들기
+
+### 프로젝트 만들기
+- 단계
+    1. django-admin startpoject _name_ : name에는 프로젝트와 관련된 모든 파일들이 있음
+        - name 생성시 name의 이름의 root 폴더와 name과 같은 이름의 자식 폴더가 있음. root폴더는 이름을 바꿔도 ㄱㅊ
+        - 생성폴더 구조
+            - `_name_`
+                - `_name_`
+                    - `__init__.py` : 이 파일이 있어야 파이썬 패키지로 인식한다고 함
+                    - `asgi.py` : 
+                    - `settings.py` : 프로젝트 설정 파일
+                    - `urls.py` : URLconf, 모든 url을 모으는 장소
+                    - `wsgi.py` : Web server gate interface , 아파치 등의 웹서버와 WSGI 규격을 연동하기 위한 파일
+                - `manage.py` : Django의 명령어를 실행시켜주는 파일
+    2. python manage.py startapp `_appname_` : Application을 만드는 명렁어, Django는 프로젝트 하나에 여러 특정 기능을 담당하는 Application이 있다
+        - 생성폴더 구조
+            - `_name_`
+            - `appname_`
+                - `migration` : DB (MODEL) 변경사항을 관리 DIR, CRUD 이 발생하면 변경 내역을 기록한 파일이 생김
+                - `__init__.py` : 이 파일이 있어야 파이썬 패키지로 인식
+                - `admin.py` : Django가 제공하는 Amin 사이트에 Model로 생성한 Model class를 등록해주는 파일
+                - `apps.py` : 
+                - `models.py` : Model calss를 정의하는 파일
+                - `tests.py` : 모름
+                - `views.py` : URLconf를 따로 정의가능하고, view 함수 , view class를 정의하는 파일
+    - App을 만들었으면 URLconf를 지정해줘야함
+        - 특징
+            1. 접속경로는 appname/을 root로 한다
+    3. URLconf
+        
+    3. App folder에 template 폴더 만들기 : App기능을 따로 하는 template을 만들어서 settings.py에 포함시키기가 가능하다
+    - 생성 폴더의 용도
+        - 
+### 명령어
+
+1. python manage.py migrate : DB에 변경사항(MODEL 의 추가 삭제 등..)이 있을 때 반영하기 위해 사용
+
+2. python manage.py createsuperuser : admin 진입시 사용할 id/비번
+
+3. python manage.py runserver 0.0.0.0:8000 : admin 진입하기위한
+
+### MVT 만들기
+
+1. Model : DB 만들기
+    - App 폴더의 models.py를 수정한다
+
+
+# 오류 강령
+
+1. settings.py 에 INSTALLED_APPS 변수에 추가된 Application 주소를 다시 체크한다

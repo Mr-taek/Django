@@ -14,6 +14,10 @@ class LEEKT(models.Model):
 
 class voting(models.Model):
     candidate=models.CharField(max_length=100)
-
     def __str__(self) -> str:
         return self.candidate
+
+class Question(models.Model):
+    word=models.CharField(max_length=50)
+    def __str__(self) -> str:
+        return self.word

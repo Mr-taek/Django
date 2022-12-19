@@ -49,6 +49,11 @@
 ### <중요개념> URLconf
 - URL은 클라이언트의 요청에 맞는 내용을 출력시켜주기 위한 통로이다, Django는 수정에 용이하도록 설계되어 있다
 
+### <중요개념> Templates의 경로설정
+- URLconf와 views를 작성할 때 자동으로 따라오는 것이 templates의 작성이다
+- veiws에서 render 함수를 통해 호출할 .html 템플릿 파일을 불러오기 위해선 settings.py에 정의된 TEMPLATES의 위치가 필수이다. (103page)
+
+
 - Django의 URL 분석방법
     0. url 요청이 들어옴
     1. setting.py 파일의 ROOT_URLCONF 항목을 읽어 모든 url이 모여있는 URLCconf 파일(urls.py)을 설정
@@ -120,8 +125,15 @@
         - 
 ### 명령어
 
-1. python manage.py migrate : DB에 변경사항(MODEL 의 추가 삭제 등..)이 있을 때 반영하기 위해 사용
+0. python manage.py makemigration
 
+1. python manage.py migrate : DB에 변경사항(MODEL 의 추가 삭제 등..)이 있을 때 반영하기 위해 사용
+    - ERROR 발생 사항, 0번 안 할 시
+    ```
+    Your models in app(s): 'vote' have changes that are not yet reflected in a migration, and so won't be applied. 
+    Run 'manage.py makemigrations' to make new migrations, and then re-run 'manage.py migrate' to apply them.
+    ```
+    
 2. python manage.py createsuperuser : admin 진입시 사용할 id/비번
 
 3. python manage.py runserver 0.0.0.0:8000 : admin 진입하기위한

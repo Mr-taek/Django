@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "vote.apps.VoteConfig" # 설마..!?
+    "vote.apps.VoteConfig", # 설마..!?
+    "polls.apps.PollsConfig"
 ]
 
 MIDDLEWARE = [

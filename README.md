@@ -4,6 +4,11 @@
 
 [장고 프로젝트 만들기 및 APP구축](#장고-프로젝트-및-명령어와-mvt-만들기)
 
+[GET|POST 이론](#GET-POST-이론)
+
+[model활용방법](#model사용법)
+
+
 [만약오류|동작이 이상하다면](#오류-강령)
 # 장고 특징
 
@@ -158,10 +163,10 @@
         - 
 ### 명령어
 
-0. python manage.py makemigration
+0. python manage.py makemigrations : models.py에 만든 내용을 DB와 직접적으로 연동시킬 PYTHON FILE(생성한 app 파일 안에 migrations.py)에 수정/생성 부분 작성
 
 1. python manage.py migrate : DB에 변경사항(MODEL 의 추가 삭제 등..)이 있을 때 반영하기 위해 사용
-    - ERROR 발생 사항, 0번 안 할 시
+    - ERROR 발생 사항, makemigrations 안 할 시
     ```
     Your models in app(s): 'vote' have changes that are not yet reflected in a migration, and so won't be applied. 
     Run 'manage.py makemigrations' to make new migrations, and then re-run 'manage.py migrate' to apply them.
@@ -176,7 +181,19 @@
 1. Model : DB 만들기
     - App 폴더의 models.py를 수정한다
 
+# GET POST 이론
 
+1. GET : DB에 있는 속성, PARAMETER 접근. 주소 안에다 "/?파라미터이름=값" 의 형태로 URL 진입
+    - 최초 url 진입시엔 GET으로 진입하게 된다
+2. POST : CREATE , UPDATE 방식. 서버 내 어떤 정보를 수정|생성할 때 사용함. 
+    - 사용법 : HTML 에 form 태그를 사용한다
+    - form 태그 : 어떤 파일, 많은 데이터 등이 POST의 BODY에 담기는데 이것을 모두 담는 태그.
+        - action 속성 : form 태그가 활성화 되면 이동할 위치, 반드시 URL에 "/~/" 처럼 /으로 시작해서 끝나야함. 오류남!
+        
+# model사용법
+- 설명 : 모든 저장되는 내용은 db.sqlite3 에 저장된다
+
+- view함수에서 model 클래스를 불러와서 변수에 저장하고 해당 변수.save() 하면 ㅇㅋ
 # 오류 강령
 
 1. settings.py 에 INSTALLED_APPS 변수에 추가된 Application 주소를 다시 체크한다

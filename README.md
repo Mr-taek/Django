@@ -4,12 +4,15 @@
 
 [장고 프로젝트 만들기 및 APP구축](#장고-프로젝트-및-명령어와-mvt-만들기)
 
+[장고 templates사용법](#template사용법)
+
 [GET|POST 이론](#GET-POST-이론)
 
 [model활용방법](#model사용법)
 
-
 [만약오류|동작이 이상하다면](#오류-강령)
+
+
 # 장고 특징
 
 1. Elegant URL : 바로이동[Django의 URL](#중요개념-urlconf)
@@ -17,6 +20,20 @@
 2. 다국어 지원
 
 3. `테스트용 웹 서버를 실행(runserver) 상태에서 소스 파일 수정시 즉시 반영`
+
+
+
+# template사용법
+    1. base 템플릿 생성시
+        1. project 폴더의 바로 하위에 template 폴더를 넣는다. 이 때 폴더이름은 반드시 settings.py 의 템플릿 DIRS에 명시된 이름이어야 한다
+            - E.G : base template 폴더이름 : basetemplate, TEMPLATES=[{~~, "DIRS" :["basetemplate"]}]
+    2. application 폴더안에 템플릿 생성시
+        1. 반드시 template폴더 - app이름과동일한폴더 - .html 파일들 , 구성으로 생성되어야 한다
+            1. template 폴더는 반드시 settings.py template에 명시된 이름이어야 한다
+            2. app이름과 동일한 폴더가 아니면 오류가 난다
+
+
+
 
 # 장고 용어
 

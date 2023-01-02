@@ -10,6 +10,8 @@
 
 [model활용방법](#model사용법)
 
+[Login기능구현](#Login)
+
 [만약오류|동작이 이상하다면](#오류-강령)
 
 
@@ -211,6 +213,47 @@
 - 설명 : 모든 저장되는 내용은 db.sqlite3 에 저장된다
 
 - view함수에서 model 클래스를 불러와서 변수에 저장하고 해당 변수.save() 하면 ㅇㅋ
+
+# Login
+- views.py : login 기능을 구현
+    - 진입 형태
+        ```
+        def login(requs):
+            ~~
+        ```
+    설명 : view함수는 기본적으로 html에서부터 변수를 가져온다. 따라서 모든 함수에는 requst 변수가 있고 이 안에 html에서 넘어온 모든 정보가 담겨 있다
+    - 변수 설명 
+        0. requs : html에서 넘어왔을 때 
+        - 속성
+            1. user : django가 기본적으로 제공하는 변수. views를 통해 html 생성시 모든 html에서 user.로 변수 접근 가능. view에선 req.user 으로 html에선 그냥 user. 으로
+                - Attribute
+                    1. req.user.id : user의 DB에 있는 id를 출력
+                        - 로그인 안 되어 있을 때 :None
+                    2. req.user.is_active : 활성화 되어 있는 지
+                        - 로그인 안 되어 있을 때 : False
+
+                    3. req.user.is_anonymois : 현재 접속한 사용자가 회원인지(False) 아닌지(True)
+
+                    4. req.user.is_authenticated : 현재 접속한 사용자가 회원인지(True) 아닌지(False)
+
+                    5. req.user.pk
+                        - 로그인 안 되어 있을 때 :None
+
+                    6. req.user.user_permissions : 
+                        - 로그인 안 되어 있을 때 : auth.Permission.None
+             2. POST / GET : dict 비슷한 형태로 값들이 넘어옴. form 태그 안에 있는 모든 값들이 name:value 형태로 넘어옴
+                - Attribute
+                    1. requs.POST.get(name) : name 키에 맞는 value가 넘어옴
+                    2. 이외 다양한 함수들이 있는데 사실상 dict형태로 특정 값을 가져오는 거라 1만 잘 써도 ㅇㅋ
+             3. get_host() : 현재 사이트에 진입을 허용한 url의 HOST 주소를 가져옴
+                - 사용법 requs.get_host() : 127.0.0.1:8000
+             4. get_full_path() , get_full_path_info() : HOST 제외 현재 사이트를 보기위한 진입 PATH를 모두 알려줌
+                - 사용법 requs.get_full_path() : /account/login/ 
+             5. method : GET / POST 중 하나
+                - 사용법 : requs.method
+                
+- models
+    
 # 오류 강령
 
 1. settings.py 에 INSTALLED_APPS 변수에 추가된 Application 주소를 다시 체크한다

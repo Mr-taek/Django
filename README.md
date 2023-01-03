@@ -10,6 +10,8 @@
 
 [model활용방법](#model사용법)
 
+[HTML_CSS 적용강령](#HTML_CSSwithDjango)
+
 [Login기능구현](#Login)
 
 [만약오류|동작이 이상하다면](#오류-강령)
@@ -213,6 +215,28 @@
 - 설명 : 모든 저장되는 내용은 db.sqlite3 에 저장된다
 
 - view함수에서 model 클래스를 불러와서 변수에 저장하고 해당 변수.save() 하면 ㅇㅋ
+
+
+# HTML_CSSwithDjango
+
+- 사전 요건 및 지식
+    1. settings.py에 보면 STATIC_URL 이 있다, 이것은 APP마다 STATIC을 적용시 STATIC파일 명을 사전에 알려주는 것이다
+        - e.g : url진입시 urls.py에 정의된 최초 진입로(page app일 때 진입을 "pages/"로 하면 pages)/static/~ 을 찾는다.
+    2. 특정 app안에 구속되지 않은 base static 을 만들어야만 한다면 settings.py에 STATICFILES_DIRS=[경로]를 지정한다.
+        - e.g : STATICFILES_DIRS=[BASE_DIR+"/"+"basestatic"]
+    3. BASE html작성시 css등 static 파일이 필요하면 2번을 만족을 시켜야만한다
+        - e.g
+            1. base.html에서 .css 불러오기 
+                ```
+                <link rel="stylesheet" href="{% static 'css/style.css' %}"> # css폴더 안에 있는 style.css를 불러온다. 경로가 사전에 정의되어 있어서 찾을 수 있다
+                ```
+            2. style.css에서 img 불러오기
+                ```
+                .home-hero{
+                    background : url("../images/this.jpg") # 같은 static폴더 안에 있는 images 폴더에서 사진을 가져온다
+                }
+                ```
+
 
 # Login
 - views.py : login 기능을 구현
